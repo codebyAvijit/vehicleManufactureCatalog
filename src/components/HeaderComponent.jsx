@@ -2,10 +2,10 @@ import React from "react";
 import SearchBarComponent from "./SearchBarComponent";
 import FilterComponent from "./FilterComponent";
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ fetchedResult, setFetchedResult }) => {
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>VEHICAL MANUFACTURERS</h1>
+      <h1 style={{ textAlign: "center" }}>VEHICLE MANUFACTURERS</h1>
       <div
         style={{
           display: "flex",
@@ -14,8 +14,14 @@ const HeaderComponent = () => {
           padding: "20px",
         }}
       >
-        <SearchBarComponent />
-        <FilterComponent />
+        <SearchBarComponent
+          fetchedResult={fetchedResult}
+          setFetchedResult={setFetchedResult}
+        />
+        <FilterComponent
+          fetchedResult={fetchedResult}
+          setFetchedResult={setFetchedResult}
+        />
       </div>
     </>
   );

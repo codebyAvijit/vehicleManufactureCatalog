@@ -17,7 +17,7 @@ const SearchBarComponent = ({ query, setQuery }) => {
         onChange={searchHandler}
         value={query}
         placeholder="Search For a Vehicle/Model/Type..."
-        style={{ padding: "5px", width: "150px" }}
+        style={{ padding: "5px", width: "210px" }}
       />
     </div>
   );

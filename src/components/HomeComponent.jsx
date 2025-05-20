@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import HeaderComponent from "./HeaderComponent";
 import SearchBarComponent from "./SearchBarComponent";
 import FilterComponent from "./FilterComponent";
+import ModalComponent from "./ModalComponent";
 
 const HomeComponent = () => {
   const [fetchedResult, setFetchedResult] = useState([]);
   const [query, setQuery] = useState("");
   const [filterType, setFilterType] = useState("");
+  const [isOpen, setIsopen] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   useEffect(() => {
     fetch(
@@ -21,6 +24,12 @@ const HomeComponent = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  const modalOpenAndCloseHandler = (vehicleData) => {
+    // console.log("row clicked");
+    setSelectedVehicle(vehicleData);
+    setIsopen(true);
+  };
 
   return (
     <>
@@ -74,13 +83,18 @@ const HomeComponent = () => {
             })
             .map((singleVehicleData) => {
               return (
-                <tr key={singleVehicleData.id}>
+                <tr
+                  //   onClick={modalOpenAndCloseHandler}
+                  onClick={() => modalOpenAndCloseHandler(singleVehicleData)}
+                  key={singleVehicleData.id}
+                >
                   <td>{singleVehicleData.make}</td>
                   <td>{singleVehicleData.model}</td>
                   <td>{singleVehicleData.vclass}</td>
                 </tr>
               );
             })}
+
           {/* <tr>
             <td>Ford Motor Company</td>
             <td>F-150</td>
@@ -93,6 +107,13 @@ const HomeComponent = () => {
           </tr> */}
         </tbody>
       </table>
+      {isOpen && selectedVehicle && (
+        <ModalComponent
+          isOpen={isOpen}
+          setIsopen={setIsopen}
+          vehicle={selectedVehicle}
+        />
+      )}
     </>
   );
 };

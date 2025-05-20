@@ -18,13 +18,14 @@ const FilterComponent = ({ fetchedResult, filterType, setFilterType }) => {
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+      <label>Filter by Type: </label>
       <select
         onChange={filterByTypeHandler}
         value={filterType}
         style={{ height: "30px" }}
       >
         <option value="" hidden>
-          Filter by Type
+          All
         </option>
         {uniqueVClasses.map((vclass, index) => (
           <option key={index} value={vclass}>
